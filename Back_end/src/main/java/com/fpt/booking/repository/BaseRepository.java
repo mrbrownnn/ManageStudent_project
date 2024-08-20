@@ -41,6 +41,7 @@ public class BaseRepository {
 
         while(var6.hasNext()) {
             Object obj = var6.next();
+            
             if (obj != null) {
                 if (!clazz.isInstance(obj)) {
                     throw new IllegalArgumentException("Error") ;
