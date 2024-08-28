@@ -61,7 +61,7 @@ public class AuthController extends BaseController {
 
     @GetMapping("/info")
     @SecurityRequirement(name = "Bearer Authentication")
-    @PreAuthorize("hasAnyRole('USER','DRIVER','ADMIN')")
+    @PreAuthorize("hasAnyRole('STUDENT','TEACHER','ADMIN')")
     @Operation(summary = "Get information of account")
     @ApiResponse(responseCode = Constant.API_RESPONSE.API_STATUS_OK_STR, description = "Get information of account successful",
             content = {@Content(mediaType = "application/json",

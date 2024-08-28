@@ -27,6 +27,7 @@ public abstract class DateAudit implements Serializable {
     
     @UpdateTimestamp
     private LocalDateTime updatedAt;
+	// update time in DB
     
 	public DateAudit() {
 		super();

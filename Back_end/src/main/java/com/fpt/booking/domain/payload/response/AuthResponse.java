@@ -21,3 +21,4 @@ public class AuthResponse {
         this.accessToken = accessToken;
     }
 }
+// token settings

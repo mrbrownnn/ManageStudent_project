@@ -38,6 +38,7 @@ public class User extends DateAudit {
 
 	@Column(name = "phone", unique = true)
 	private String phone;
+	// can be removed this feature
 
 	private String imageUrl;
 
@@ -46,7 +47,8 @@ public class User extends DateAudit {
 
 	@JsonIgnore
 	private String password;
-
+// email, password, phone, name, address, provider, providerId, isLocked, isActive, accessToken, roles
+	// json file
 	@NotNull
 	@Enumerated(EnumType.STRING)
 	private AuthProvider provider;

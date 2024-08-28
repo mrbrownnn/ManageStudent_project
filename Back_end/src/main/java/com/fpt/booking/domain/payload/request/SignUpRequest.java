@@ -24,4 +24,5 @@ public class SignUpRequest {
     private String confirmPassword;
 
     private RoleName role;
+    // use for Manager Rule
 }

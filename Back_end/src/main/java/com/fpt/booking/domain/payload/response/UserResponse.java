@@ -24,3 +24,4 @@ public class UserResponse {
     private String imageUrl;
 
 }
+// state of user response
