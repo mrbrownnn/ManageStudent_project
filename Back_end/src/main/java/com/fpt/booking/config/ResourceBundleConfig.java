@@ -19,6 +19,7 @@ public class ResourceBundleConfig {
         Locale localeEn = new Locale("en");
         labelsEn = ResourceBundle.getBundle("languages/messages", localeEn);
     }
+    // language for user
 
     public String getViMessage(String key){
         return labelsVi.getString(key);
