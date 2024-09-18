@@ -42,7 +42,6 @@ public class AuthController extends BaseController {
         authService.registerAccount(signUpRequest);
         return createSuccessResponse("Đăng kí tài khoản thành công", signUpRequest.getPhone());
     }
-    // create an account for ADMIN role, STUDENT and TEACHER cant be create account for student
 
 
     @PostMapping("/login")
@@ -59,7 +58,7 @@ public class AuthController extends BaseController {
     public ResponseEntity<?> loginForAccount(@Valid @RequestBody LoginRequest loginRequest) {
         return createSuccessResponse("Đăng nhập tài khoản thành công", authService.login(loginRequest));
     }
-// api settings
+
     @GetMapping("/info")
     @SecurityRequirement(name = "Bearer Authentication")
     @PreAuthorize("hasAnyRole('STUDENT','TEACHER','ADMIN')")

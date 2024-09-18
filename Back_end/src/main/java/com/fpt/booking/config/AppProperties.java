@@ -33,7 +33,6 @@ public class AppProperties {
         }
     }
     // remove oauth2
-    // token settings
 
     public Auth getAuth() {
         return auth;
