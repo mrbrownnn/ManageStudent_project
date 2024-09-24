@@ -1,10 +1,8 @@
 -- Tạo DB
 CREATE DATABASE QLSV;
-GO
 
 -- Sử dụng DB vừa tạo
 USE QLSV;
-GO
 
 -- Tạo bảng sinh viên
 CREATE TABLE students (
@@ -94,7 +92,7 @@ VALUES
     ('6','D22VT05','D22VT05','student','D22VT05');
 
 -- Nhập Data cho bảng courses
-INSERT INTO courses (course_id, course_name, credit)
+INSERT INTO courses (course_id, course_name, credit, semester)
 VALUES
     ('BAS1150', 'Triết học Mác Lênin', 3, 1),
     ('BAS1201', 'Đại số', 3, 1),
@@ -138,6 +136,14 @@ VALUES
     ('TEL1401', 'An toàn mạng thông tin', 3, 7),
     ('TEL1343', 'Cơ sở dữ liệu', 3, 7),
     ('SKD1108', 'Phương pháp luận NCKH', 2, 7);
+('TEL1457','Hệ thống nhúng IoT','3'	MT: ELE1317
+TEL1452	Kiến trúc và giao thức IoT	2	MT: TEL1469
+TEL1454	Lập trình nhúng	2	MT: TEL1340
+TEL1464	Các giải pháp và hệ thống IoT tiên tiến	2	MT: TEL1469
+TEL1448	Lập trình hướng đối tượng	3	MT: TEL1340
+TEL1460	Lưu trữ và phân tích dữ liệu	3
+TEL1467	Hệ thống cảm biến	3
+
 
 -- Nhập Data cho bảng môn học tiên quyết
 INSERT INTO prerequisite_courses (course_id, prerequisite_course_id)
