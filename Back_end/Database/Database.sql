@@ -1,6 +1,5 @@
 -- Tạo DB
 CREATE DATABASE QLSV;
-
 -- Sử dụng DB vừa tạo
 USE QLSV;
 
@@ -92,7 +91,7 @@ VALUES
     ('6','D22VT05','D22VT05','student','D22VT05');
 
 -- Nhập Data cho bảng courses
-INSERT INTO courses (course_id, course_name, credit, semester)
+INSERT INTO courses (course_id, course_name, credit)
 VALUES
     ('BAS1150', 'Triết học Mác Lênin', 3, 1),
     ('BAS1201', 'Đại số', 3, 1),
@@ -135,15 +134,6 @@ VALUES
     ('TEL1469', 'Internet và các giao thức', 3, 7),
     ('TEL1401', 'An toàn mạng thông tin', 3, 7),
     ('TEL1343', 'Cơ sở dữ liệu', 3, 7),
-    ('SKD1108', 'Phương pháp luận NCKH', 2, 7);
-('TEL1457','Hệ thống nhúng IoT','3'	MT: ELE1317
-TEL1452	Kiến trúc và giao thức IoT	2	MT: TEL1469
-TEL1454	Lập trình nhúng	2	MT: TEL1340
-TEL1464	Các giải pháp và hệ thống IoT tiên tiến	2	MT: TEL1469
-TEL1448	Lập trình hướng đối tượng	3	MT: TEL1340
-TEL1460	Lưu trữ và phân tích dữ liệu	3
-TEL1467	Hệ thống cảm biến	3
-
 
 -- Nhập Data cho bảng môn học tiên quyết
 INSERT INTO prerequisite_courses (course_id, prerequisite_course_id)
@@ -171,6 +161,7 @@ VALUES
     ('TEL1401', 'TEL1405'),
     ('TEL1343', 'TEL1337'),
     ('TEL1343', 'TEL1342');
+
 
 -- Nhập Data cho bảng classes
 INSERT INTO classes
@@ -203,7 +194,7 @@ VALUES
     ('TEL1340_2','TEL1340','Nhóm 2',3,'503-A2','Thứ 5','9-11h'),
     ('TEL1340_3','TEL1340','Nhóm 3',3,'503-A2','Thứ 6','7-9h'),
     ('TEL1340_4','TEL1340','Nhóm 4',3,'503-A2','Thứ 6','9-11h');
-  
+  -- Nhập Data cho bảng classes
   INSERT INTO classes(class_id,course_id)
   VALUES
     ('BAS1150_1','BAS1150'),
@@ -229,7 +220,7 @@ VALUES
     ('ELE13101_1','ELE13101'),
     ('TEL1345_1','TEL1345');
         
--- Nhập Data cho bảng registrations
+-- Nhập Data cho bảng registrations, include final_grade
 INSERT INTO registrations(student_id,class_id,grade1,grade1_weight,grade2,grade2_weight,grade3,grade3_weight,final_exam,final_exam_weight)
 VALUES
     ('D22VT01','BAS1150_1', 6.5, 10, 7.5, 10, 7, 20, 6.5, 60),
