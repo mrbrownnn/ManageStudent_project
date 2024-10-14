@@ -13,7 +13,7 @@ import org.hibernate.annotations.NaturalId;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class Role {
+public class Accounts {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long account_id;
