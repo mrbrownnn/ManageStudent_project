@@ -22,6 +22,7 @@ CREATE TABLE accounts (
   role ENUM('student', 'admin'),-- 2 vai trò: sinh viên và admin, foreign key is student id--
   student_id VARCHAR(10),
   FOREIGN KEY (student_id) REFERENCES students(student_id)-- foreign key reference to student id--
+    -- admin ? == null ? --
 );
 
 -- Tạo bảng môn học
@@ -199,6 +200,8 @@ VALUES
     ('TEL1340_3','TEL1340','Nhóm 3',3,'503-A2','Thứ 6','7-9h'),
     ('TEL1340_4','TEL1340','Nhóm 4',3,'503-A2','Thứ 6','9-11h');
   -- Nhập Data cho bảng classes
+
+  --UPDATE TABBLE classes neu gv dki mo lop
   INSERT INTO classes(class_id,course_id)
   VALUES
     ('BAS1150_1','BAS1150'),
