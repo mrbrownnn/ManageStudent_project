@@ -13,5 +13,6 @@ public class OAuth2AuthenticationProcessingException extends AuthenticationExcep
     public OAuth2AuthenticationProcessingException(String msg) {
         super(msg);
     }
+    // exception for oauth2 authentication
 }
 

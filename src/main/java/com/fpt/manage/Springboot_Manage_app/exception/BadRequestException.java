@@ -13,4 +13,5 @@ public class BadRequestException extends RuntimeException {
 
         super(message, cause);
     }
+    // http status 400
 }
