@@ -1,4 +1,4 @@
-/*
+
 package com.fpt.manage.Springboot_Manage_app.domain.entrities;
 
 
@@ -8,25 +8,27 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.NaturalId;
+
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name = "accounts")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Role {
-    @ManyToMany(mappedBy = "roles")
+public class Admin extends Role{
+    @ManyToMany(mappedBy = "role")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String ;
-    @Enumerated(EnumType.STRING)
-    @NaturalId
-    @Column(length = 60)
-    private RoleName name;
+    private Long id;
+    public enum RoleName {
+        USER,
+        ADMIN
+    }
     private static GeneratedValue GeneratedValue(GenerationType identity) {
         return null;
     }
-    }
 }
 
- */
