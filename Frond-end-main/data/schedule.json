@@ -1,0 +1,52 @@
+{
+    "schedule": {
+        "Monday": [
+            {"time": "08:00 - 09:00", "subject": "Toán cao cấp"},
+            {"time": "09:00 - 10:00", "subject": "Lập trình C"},
+            {"time": "10:00 - 11:00", "subject": ""},
+            {"time": "11:00 - 12:00", "subject": "Vật lý"},
+            {"time": "13:00 - 14:00", "subject": ""},
+            {"time": "14:00 - 15:00", "subject": "Hóa học"}
+        ],
+        "Tuesday": [
+            {"time": "08:00 - 09:00", "subject": ""},
+            {"time": "09:00 - 10:00", "subject": "Thống kê"},
+            {"time": "10:00 - 11:00", "subject": "Quản trị mạng"},
+            {"time": "11:00 - 12:00", "subject": ""},
+            {"time": "13:00 - 14:00", "subject": "Kiến trúc máy tính"},
+            {"time": "14:00 - 15:00", "subject": ""}
+        ],
+        "Wednesday": [
+            {"time": "08:00 - 09:00", "subject": "Lập trình web"},
+            {"time": "09:00 - 10:00", "subject": ""},
+            {"time": "10:00 - 11:00", "subject": ""},
+            {"time": "11:00 - 12:00", "subject": "Phân tích thiết kế"},
+            {"time": "13:00 - 14:00", "subject": "Nhập môn AI"},
+            {"time": "14:00 - 15:00", "subject": ""}
+        ],
+        "Thursday": [
+            {"time": "08:00 - 09:00", "subject": "Cơ sở dữ liệu"},
+            {"time": "09:00 - 10:00", "subject": ""},
+            {"time": "10:00 - 11:00", "subject": ""},
+            {"time": "11:00 - 12:00", "subject": "Lập trình di động"},
+            {"time": "13:00 - 14:00", "subject": ""},
+            {"time": "14:00 - 15:00", "subject": ""}
+        ],
+        "Friday": [
+            {"time": "08:00 - 09:00", "subject": ""},
+            {"time": "09:00 - 10:00", "subject": "Mạng máy tính"},
+            {"time": "10:00 - 11:00", "subject": ""},
+            {"time": "11:00 - 12:00", "subject": ""},
+            {"time": "13:00 - 14:00", "subject": "Khoa học máy tính"},
+            {"time": "14:00 - 15:00", "subject": ""}
+        ],
+        "Saturday": [
+            {"time": "08:00 - 09:00", "subject": ""},
+            {"time": "09:00 - 10:00", "subject": ""},
+            {"time": "10:00 - 11:00", "subject": "Thực tập"},
+            {"time": "11:00 - 12:00", "subject": ""},
+            {"time": "13:00 - 14:00", "subject": ""},
+            {"time": "14:00 - 15:00", "subject": ""}
+        ]
+    }
+}

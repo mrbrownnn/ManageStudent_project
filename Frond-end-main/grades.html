@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xem điểm</title>
+    <link rel="stylesheet" href="asset/css/styles.css">
+</head>
+<body>
+    <!-- Thanh điều hướng -->
+    <nav class="navbar">
+        <div class="logo">Quản lý sinh viên</div>
+        <ul class="nav-links">
+            <li><a href="profile.html">Thông tin sinh viên</a></li>
+            <li><a href="grades.html" class="active">Xem điểm</a></li>
+            <li><a href="register.html">Đăng ký môn học</a></li>
+            <li><a href="schedule.html" >Lên lịch học</a></li>
+            <li><a href="schedule-view.html">Xem lịch học</a></li>
+            <li><a href="index.html" class="logout">Đăng xuất</a></li>
+        </ul>
+    </nav>
+
+    <!-- Nội dung trang xem điểm -->
+    <div class="container">
+        <div class="grade-view">
+            <h2>Bảng điểm</h2>
+            <div class="semester-select">
+                <label for="semester">Chọn kỳ học:</label>
+                <select id="semester">
+                    <option value="1">Kỳ 1</option>
+                    <option value="2">Kỳ 2</option>
+                </select>
+            </div>
+            <table class="grade-table">
+                <thead>
+                    <tr>
+                        <th>Mã môn học</th>
+                        <th>Tên môn học</th>
+                        <th>Điểm thang 4</th>
+                        <th>Điểm thang 10</th>
+                    </tr>
+                </thead>
+                <tbody id="gradeTableBody">
+                    <!-- Dữ liệu sẽ được thêm vào đây -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Hàm tải file JSON và cập nhật bảng
+        function loadGrades(semester) {
+            fetch('data/diem.json') // Đường dẫn tới file JSON
+                .then(response => response.json())
+                .then(data => {
+                    const tableBody = document.getElementById('gradeTableBody');
+                    tableBody.innerHTML = ''; // Xóa nội dung cũ
+
+                    // Lấy danh sách môn học theo kỳ học đã chọn
+                    const grades = data[`semester_${semester}`];
+                    grades.forEach(grade => {
+                        // Thêm hàng mới vào bảng
+                        const row = `<tr>
+                            <td>${grade.code}</td>
+                            <td>${grade.name}</td>
+                            <td>${grade.grade4}</td>
+                            <td>${grade.grade10}</td>
+                        </tr>`;
+                        tableBody.innerHTML += row;
+                    });
+                })
+                .catch(error => console.error('Error loading JSON:', error));
+        }
+
+        // Khi người dùng chọn kỳ học
+        document.getElementById('semester').addEventListener('change', function() {
+            const selectedSemester = this.value;
+            loadGrades(selectedSemester);
+        });
+
+        // Tải dữ liệu kỳ 1 khi trang được load
+        window.onload = function() {
+            loadGrades(1);
+        };
+    </script>
+</body>
+</html>

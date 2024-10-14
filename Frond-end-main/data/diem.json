@@ -1,0 +1,11 @@
+{
+    "semester_1": [
+      {"code": "CSE101", "name": "Lập trình C", "grade4": 3.5, "grade10": 8.5},
+      {"code": "MTH202", "name": "Toán cao cấp", "grade4": 3.0, "grade10": 7.5}
+    ],
+    "semester_2": [
+      {"code": "PHY101", "name": "Vật lý đại cương", "grade4": 3.8, "grade10": 9.0},
+      {"code": "ENG201", "name": "Tiếng Anh cơ bản", "grade4": 4.0, "grade10": 10.0}
+    ]
+  }
+  

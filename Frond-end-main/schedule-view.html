@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xem Lịch Học</title>
+    <link rel="stylesheet" href="asset/css/styles.css">
+</head>
+<body>
+    <!-- Thanh điều hướng -->
+    <nav class="navbar">
+        <div class="logo">Quản lý sinh viên</div>
+        <ul class="nav-links">
+            <li><a href="profile.html">Thông tin sinh viên</a></li>
+            <li><a href="grades.html">Xem điểm</a></li>
+            <li><a href="register.html">Đăng ký môn học</a></li>
+            <li><a href="schedule.html">Lên lịch học</a></li>
+            <li><a href="schedule-view.html" class="active">Xem lịch học</a></li>
+            <li><a href="index.html" class="logout">Đăng xuất</a></li>
+        </ul>
+    </nav>
+
+    <!-- Nội dung trang xem lịch học -->
+    <div class="container">
+        <div class="schedule-view">
+            <h2>Thời Khóa Biểu</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Khung Giờ</th>
+                        <th>Thứ 2</th>
+                        <th>Thứ 3</th>
+                        <th>Thứ 4</th>
+                        <th>Thứ 5</th>
+                        <th>Thứ 6</th>
+                        <th>Thứ 7</th>
+                    </tr>
+                </thead>
+                <tbody id="scheduleTableBody">
+                    <!-- Dữ liệu sẽ được thêm vào đây thông qua JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Lấy dữ liệu từ file JSON
+            fetch('data/schedule.json')
+                .then(response => response.json())
+                .then(data => {
+                    const scheduleTableBody = document.getElementById('scheduleTableBody');
+                    const timeSlots = [
+                        "08:00 - 09:00",
+                        "09:00 - 10:00",
+                        "10:00 - 11:00",
+                        "11:00 - 12:00",
+                        "13:00 - 14:00",
+                        "14:00 - 15:00"
+                    ];
+
+                    timeSlots.forEach(timeSlot => {
+                        const row = document.createElement('tr');
+                        const timeSlotCell = document.createElement('td');
+                        timeSlotCell.textContent = timeSlot;
+                        row.appendChild(timeSlotCell);
+
+                        // Duyệt qua các ngày trong tuần
+                        ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'].forEach(day => {
+                            const cell = document.createElement('td');
+                            const classInfo = data.schedule[day].find(cls => cls.time === timeSlot);
+                            // Nếu không có lớp, để ô trống
+                            cell.textContent = classInfo ? classInfo.subject : '';
+                            if (!classInfo) {
+                                cell.classList.add('no-class'); // Nếu không có lớp, áp dụng kiểu dáng
+                            }
+                            row.appendChild(cell);
+                        });
+
+                        scheduleTableBody.appendChild(row);
+                    });
+                })
+                .catch(error => console.error('Error loading schedule data:', error));
+        });
+    </script>
+</body>
+</html>

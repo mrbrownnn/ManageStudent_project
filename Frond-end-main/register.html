@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký môn học</title>
+    <link rel="stylesheet" href="asset/css/styles.css">
+</head>
+<body>
+    <!-- Thanh điều hướng -->
+    <nav class="navbar">
+        <div class="logo">Quản lý sinh viên</div>
+        <ul class="nav-links">
+            <li><a href="profile.html">Thông tin sinh viên</a></li>
+            <li><a href="grades.html">Xem điểm</a></li>
+            <li><a href="register.html" class="active">Đăng ký môn học</a></li>
+            <li><a href="schedule.html" >Lên lịch học</a></li>
+            <li><a href="schedule-view.html">Xem lịch học</a></li>
+            <li><a href="index.html" class="logout">Đăng xuất</a></li>
+        </ul>
+    </nav>
+
+    <!-- Nội dung trang đăng ký môn học -->
+    <div class="container">
+        <div class="course-registration">
+            <h2>Đăng ký môn học</h2>
+            <form action="#" method="post">
+                <table class="course-table">
+                    <thead>
+                        <tr>
+                            <th>Chọn</th>
+                            <th>Mã môn học</th>
+                            <th>Tên môn học</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="checkbox" name="course" value="CSE101"></td>
+                            <td>CSE101</td>
+                            <td>Lập trình C</td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" name="course" value="MTH202"></td>
+                            <td>MTH202</td>
+                            <td>Toán cao cấp</td>
+                        </tr>
+                        <!-- Thêm nhiều môn học hơn nếu cần -->
+                    </tbody>
+                </table>
+                <div class="submit-btn">
+                    <button type="submit">Đăng ký</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+    "courses": [
+      {
+        "id": "CSE101",
+        "name": "Lập trình C",
+        "sections": ["CSE101_01", "CSE101_02"]
+      },
+      {
+        "id": "MTH202",
+        "name": "Toán cao cấp",
+        "sections": ["MTH202_01", "MTH202_02"]
+      }
+    ],
+    "rooms": ["A101", "B202", "C303"],
+    "timeSlots": ["Thứ 2 - 8:00 - 10:00", "Thứ 4 - 14:00 - 16:00", "Thứ 6 - 9:00 - 11:00"]
+  }
+  

@@ -1,201 +1,217 @@
-
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap");
-:root {
-  --white-color: hsl(0, 0%, 100%);
-  --black-color: hsl(0, 0%, 0%);
-
-  --body-font: "Poppins", sans-serif;
-  --h1-font-size: 1.75rem;
-  --normal-font-size: 1rem;
-  --small-font-size: .813rem;
-
-  --font-medium: 500;
-}
-
-
+/* Reset mặc định */
 * {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-body,
-input,
-button {
-  font-size: var(--normal-font-size);
-  font-family: var(--body-font);
-}
-
+/* Toàn bộ trang web */
 body {
-  color: var(--white-color);
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom right, #e0f7ff, #cceeff);
+    color: #333;
 }
 
-input,
-button {
-  border: none;
-  outline: none;
+/* Thanh điều hướng */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #007acc;
 }
 
-a {
-  text-decoration: none;
+.navbar .logo {
+    font-size: 1.5em;
+    color: white;
 }
 
-img {
-  max-width: 100%;
-  height: auto;
+.navbar .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
 }
 
-
-.login {
-  position: relative;
-  height: 100vh;
-  display: grid;
-  align-items: center;
-}
-.login__img {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-.login__form {
-  position: relative;
-  background-color: hsla(0, 0%, 10%, 0.1);
-  border: 2px solid var(--white-color);
-  margin-inline: 1.5rem;
-  padding: 2.5rem 1.5rem;
-  border-radius: 1rem;
-  backdrop-filter: blur(8px);
-}
-.login__title {
-  text-align: center;
-  font-size: var(--h1-font-size);
-  font-weight: var(--font-medium);
-  margin-bottom: 2rem;
-}
-.login__content, .login__box {
-  display: grid;
-}
-.login__content {
-  row-gap: 1.75rem;
-  margin-bottom: 1.5rem;
-}
-.login__box {
-  grid-template-columns: max-content 1fr;
-  align-items: center;
-  column-gap: 0.75rem;
-  border-bottom: 2px solid var(--white-color);
-}
-.login__icon, .login__eye {
-  font-size: 1.25rem;
-}
-.login__input {
-  width: 100%;
-  padding-block: 0.8rem;
-  background: none;
-  color: var(--white-color);
-  position: relative;
-  z-index: 1;
-}
-.login__box-input {
-  position: relative;
-}
-.login__label {
-  position: absolute;
-  left: 0;
-  top: 13px;
-  font-weight: var(--font-medium);
-  transition: top 0.3s, font-size 0.3s;
-}
-.login__eye {
-  position: absolute;
-  right: 0;
-  top: 18px;
-  z-index: 10;
-  cursor: pointer;
-}
-.login__box:nth-child(2) input {
-  padding-right: 1.8rem;
-}
-.login__check, .login__check-group {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.login__check {
-  margin-bottom: 1.5rem;
-}
-.login__check-label, .login__forgot, .login__register {
-  font-size: var(--small-font-size);
-}
-.login__check-group {
-  column-gap: 0.5rem;
-}
-.login__check-input {
-  width: 16px;
-  height: 16px;
-}
-.login__forgot {
-  color: var(--white-color);
-}
-.login__forgot:hover {
-  text-decoration: underline;
-}
-.login__button {
-  width: 100%;
-  padding: 1rem;
-  border-radius: 0.5rem;
-  background-color: var(--white-color);
-  font-weight: var(--font-medium);
-  cursor: pointer;
-  margin-bottom: 2rem;
-}
-.login__register {
-  text-align: center;
-}
-.login__register a {
-  color: var(--white-color);
-  font-weight: var(--font-medium);
-}
-.login__register a:hover {
-  text-decoration: underline;
+.navbar .nav-links li {
+    display: inline;
 }
 
-
-.login__input:focus + .login__label {
-  top: -12px;
-  font-size: var(--small-font-size);
+.navbar .nav-links a {
+    text-decoration: none;
+    color: white;
+    padding: 8px 16px;
+    transition: background-color 0.3s ease;
 }
 
-
-.login__input:not(:placeholder-shown).login__input:not(:focus) + .login__label {
-  top: -12px;
-  font-size: var(--small-font-size);
+.navbar .nav-links a:hover {
+    background-color: #005f99;
+    border-radius: 5px;
 }
 
-.footer {
-    position: absolute;
-    bottom: 0;
+.navbar .nav-links a.active {
+    background-color: #005f99;
+    border-radius: 5px;
+}
+
+.logout {
+    background-color: #ff6666;
+    padding: 8px 16px;
+    border-radius: 5px;
+}
+
+.logout:hover {
+    background-color: #cc3333;
+}
+
+/* Nội dung trang */
+.container {
+    display: flex;
+    justify-content: center; /* Center the schedule table */
+    padding: 20px;
+    margin-top: 20px;
     width: 100%;
+}
+
+/* Khung chứa thông tin sinh viên và biểu đồ điểm */
+.info-chart-container {
+    display: flex; /* Sử dụng Flexbox để căn chỉnh các phần */
+    justify-content: space-between;
+    width: 100%;
+}
+
+/* Thông tin sinh viên và biểu đồ điểm */
+.student-info,
+.grade-chart {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 48%; /* Đảm bảo chiều rộng đủ để hiển thị bên cạnh nhau */
+}
+
+/* Tiêu đề */
+h2 {
+    margin-bottom: 15px;
+}
+
+/* Bảng xem lịch học */
+.schedule-view {
+    width: 100%; /* Ensure the table takes full width in container */
+    max-width: 1200px; /* Limit the maximum width */
+    margin: 0 auto; /* Center it horizontally */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 10px;
     text-align: center;
-    padding: 1rem;
-    background: rgba(0, 0, 0, 0.5); 
-    color: var(--white-color);
-  }
-  
+}
 
+th {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+}
 
-@media screen and (min-width: 576px) {
-  .login {
-    justify-content: center;
-  }
-  .login__form {
-    width: 432px;
-    padding: 4rem 3rem 3.5rem;
-    border-radius: 1.5rem;
-  }
-  .login__title {
-    font-size: 2rem;
-  }
+td {
+    background-color: #f2f2f2;
+}
+
+.no-class {
+    background-color: #e0e0e0; /* Ô trống có màu nền khác */
+}
+
+/* Các bảng khác */
+.grade-view, .course-registration {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 80%; /* Đảm bảo tất cả đều có cùng chiều rộng */
+    margin: 20px auto; /* Giữ khoảng cách đồng đều */
+}
+
+.grade-view h2, .course-registration h2 {
+    margin-bottom: 15px;
+}
+
+.grade-table, .course-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.grade-table th, .grade-table td, 
+.course-table th, .course-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+.grade-table th, .course-table th {
+    background-color: #007acc;
+    color: white;
+}
+
+.grade-table tbody tr:nth-child(even), .course-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.grade-table tbody tr:hover, .course-table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+.submit-btn {
+    margin-top: 20px;
+    text-align: right;
+}
+
+.submit-btn button {
+    padding: 10px 20px;
+    background-color: #007acc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn button:hover {
+    background-color: #005f99;
+}
+
+/* Thông tin sinh viên */
+.student-details {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.student-details li {
+    padding: 8px 0;
+    font-size: 1em;
+}
+
+.student-details li strong {
+    color: #007acc;
+}
+
+/* Biểu đồ điểm */
+.grade-chart {
+    margin-top: 40px; /* Tạo khoảng cách giữa thông tin sinh viên và biểu đồ */
+}
+
+/* Các kiểu khác cho dễ nhìn */
+.card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    margin: 20px 0;
 }

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lên lịch học</title>
+    <link rel="stylesheet" href="asset/css/styles.css">
+    <style>
+        .schedule-form {
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            max-width: 600px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group select {
+            width: 100%;
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        .submit-btn {
+            text-align: center;
+        }
+
+        .submit-btn button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .submit-btn button:hover {
+            background-color: #0056b3;
+        }
+
+        #successMessage {
+            text-align: center;
+            font-weight: bold;
+            margin-top: 15px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Thanh điều hướng -->
+    <nav class="navbar">
+        <div class="logo">Quản lý sinh viên</div>
+        <ul class="nav-links">
+            <li><a href="profile.html">Thông tin sinh viên</a></li>
+            <li><a href="grades.html">Xem điểm</a></li>
+            <li><a href="register.html">Đăng ký môn học</a></li>
+            <li><a href="schedule.html" class="active">Lên lịch học</a></li>
+            <li><a href="schedule-view.html">Xem lịch học</a></li>
+            <li><a href="index.html" class="logout">Đăng xuất</a></li>
+        </ul>
+    </nav>
+
+    <!-- Nội dung trang lên lịch học -->
+    <div class="container">
+        <div class="schedule-form">
+            <h2>Lên lịch học cho lớp học phần</h2>
+            <form id="scheduleForm">
+                <!-- Chọn môn học -->
+                <div class="form-group">
+                    <label for="course">Chọn môn học:</label>
+                    <select id="course" required>
+                        <option value="">-- Chọn môn học --</option>
+                    </select>
+                </div>
+
+                <!-- Chọn lớp học phần -->
+                <div class="form-group">
+                    <label for="classSection">Chọn lớp học phần:</label>
+                    <select id="classSection" required>
+                        <option value="">-- Chọn lớp học phần --</option>
+                    </select>
+                </div>
+
+                <!-- Chọn phòng học -->
+                <div class="form-group">
+                    <label for="room">Chọn phòng học:</label>
+                    <select id="room" required>
+                        <option value="">-- Chọn phòng học --</option>
+                    </select>
+                </div>
+
+                <!-- Chọn khung giờ -->
+                <div class="form-group">
+                    <label for="timeSlot">Chọn khung giờ:</label>
+                    <select id="timeSlot" required>
+                        <option value="">-- Chọn khung giờ --</option>
+                    </select>
+                </div>
+
+                <!-- Nút xác nhận -->
+                <div class="form-group submit-btn">
+                    <button type="submit">Xác nhận</button>
+                </div>
+
+                <!-- Thông báo -->
+                <p id="successMessage" style="color: green;">Lịch học đã được lưu thành công!</p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Lấy dữ liệu từ file JSON
+            fetch('data/courses.json')
+                .then(response => response.json())
+                .then(data => {
+                    // Populate course dropdown
+                    const courseSelect = document.getElementById('course');
+                    data.courses.forEach(course => {
+                        const option = document.createElement('option');
+                        option.value = course.id;
+                        option.textContent = course.name;
+                        courseSelect.appendChild(option);
+                    });
+
+                    // Khi chọn môn học, cập nhật danh sách lớp học phần
+                    courseSelect.addEventListener('change', function() {
+                        const selectedCourse = data.courses.find(course => course.id === this.value);
+                        const classSectionSelect = document.getElementById('classSection');
+                        classSectionSelect.innerHTML = '<option value="">-- Chọn lớp học phần --</option>';
+
+                        if (selectedCourse) {
+                            selectedCourse.sections.forEach(section => {
+                                const option = document.createElement('option');
+                                option.value = section;
+                                option.textContent = section;
+                                classSectionSelect.appendChild(option);
+                            });
+                        }
+                    });
+
+                    // Populate room dropdown
+                    const roomSelect = document.getElementById('room');
+                    data.rooms.forEach(room => {
+                        const option = document.createElement('option');
+                        option.value = room;
+                        option.textContent = room;
+                        roomSelect.appendChild(option);
+                    });
+
+                    // Populate time slot dropdown
+                    const timeSlotSelect = document.getElementById('timeSlot');
+                    data.timeSlots.forEach(slot => {
+                        const option = document.createElement('option');
+                        option.value = slot;
+                        option.textContent = slot;
+                        timeSlotSelect.appendChild(option);
+                    });
+                });
+
+            // Xử lý khi gửi form
+            document.getElementById('scheduleForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const selectedCourse = document.getElementById('course').value;
+                const selectedSection = document.getElementById('classSection').value;
+                const selectedRoom = document.getElementById('room').value;
+                const selectedTimeSlot = document.getElementById('timeSlot').value;
+
+                if (selectedCourse && selectedSection && selectedRoom && selectedTimeSlot) {
+                    // Giả lập lưu dữ liệu vào CSDL (sử dụng fetch để gửi đến backend nếu có)
+                    console.log('Lưu lịch học: ', {
+                        course: selectedCourse,
+                        section: selectedSection,
+                        room: selectedRoom,
+                        timeSlot: selectedTimeSlot
+                    });
+                    // Hiển thị thông báo thành công
+                    document.getElementById('successMessage').style.display = 'block';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
