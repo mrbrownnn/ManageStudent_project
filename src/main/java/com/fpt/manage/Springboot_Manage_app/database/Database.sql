@@ -19,9 +19,9 @@ CREATE TABLE accounts (
   account_id INT PRIMARY KEY AUTO_INCREMENT,
   username VARCHAR(50) UNIQUE,
   password VARCHAR(255),
-  role ENUM('student', 'admin'),-- 2 vai trò: sinh viên và admin, foreign key is student id--
+  role ENUM('student', 'admin'),
   student_id VARCHAR(10),
-  FOREIGN KEY (student_id) REFERENCES students(student_id)-- foreign key reference to student id--
+  FOREIGN KEY (student_id) REFERENCES students(student_id)
 );
 
 -- Tạo bảng môn học
@@ -339,7 +339,6 @@ SET final_grade= (grade1*grade1_weight+grade2*grade2_weight+grade3*grade3_weight
 
 --Thêm cột checkpass
 ALTER TABLE registrations
-    -- checking result, table name is registrations--
     ADD checkpass BOOLEAN;
 
 --Cập nhật dữ liệu cho checkpass

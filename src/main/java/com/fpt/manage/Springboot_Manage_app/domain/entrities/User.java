@@ -1,4 +1,5 @@
 
+/*
 package com.fpt.manage.Springboot_Manage_app.domain.entrities;
 
 
@@ -17,7 +18,7 @@ import org.springframework.data.annotation.Id;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class User extends RuntimeException {
+public class Role extends DateAudit {
     @ManyToMany(mappedBy = "roles")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,12 +26,10 @@ public class User extends RuntimeException {
     @NaturalId
     @Column(length = 60)
     private String id;
-    public enum RoleName {
-        USER,
-        ADMIN
-    }
 
+    private Role name;
     private static GeneratedValue GeneratedValue(GenerationType identity) {
         return null;
     }
 }
+*/
