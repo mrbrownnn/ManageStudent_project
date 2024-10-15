@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-package com.fpt.manage.Springboot_Manage_app.domain.entities;public class Courses {
-=======
 package com.fpt.manage.Springboot_Manage_app.domain.entities;
 
 import jakarta.persistence.Column;
@@ -26,5 +23,4 @@ public class Courses {
     private String CourseName;
     private int Credit;
     private int semester;
->>>>>>> 224402e0d994101a4e07a4f7906ec77acef624b0
 }
