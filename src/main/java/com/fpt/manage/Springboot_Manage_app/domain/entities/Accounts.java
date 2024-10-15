@@ -1,6 +1,4 @@
-/*
-package com.fpt.manage.Springboot_Manage_app.domain.entrities;
-
+package com.fpt.manage.Springboot_Manage_app.domain.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -14,19 +12,18 @@ import org.hibernate.annotations.NaturalId;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Role {
-    @ManyToMany(mappedBy = "roles")
+
+public class Accounts {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String ;
+    private Long account_id;
+    @Column(unique = true, length = 50)
+    private Long username;
+    @Column(length = 255)
+    private Long password;
+
     @Enumerated(EnumType.STRING)
     @NaturalId
     @Column(length = 60)
-    private RoleName name;
-    private static GeneratedValue GeneratedValue(GenerationType identity) {
-        return null;
-    }
-    }
+    private com.fpt.manage.Springboot_Manage_app.domain.entities.RoleName role;
 }
-
- */
