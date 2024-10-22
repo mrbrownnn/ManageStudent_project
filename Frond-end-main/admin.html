@@ -24,9 +24,9 @@
                 <thead>
                     <tr>
                         <th>Mã SV</th>
-                        <th>Họ tên</th>
+                        <th>Họ và tên</th>
                         <th>Khóa</th>
-                        <th>Hành động</th>
+                        <th>Chi tiết</th>
                     </tr>
                 </thead>
                 <tbody id="student-list">
@@ -49,51 +49,52 @@
 
     <script>
         // Tải dữ liệu JSON và hiển thị danh sách sinh viên
-        fetch('data/students.json')
-            .then(response => response.json())
-            .then(data => {
-                const studentList = document.getElementById('student-list');
-                data.students.forEach(student => {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td>${student.student_id}</td>
-                        <td>${student.name}</td>
-                        <td>${student.course_year}</td>
-                        <td><button onclick="showDetails('${student.student_id}')">Xem</button></td>
-                    `;
-                    studentList.appendChild(row);
-                });
-            })
-            .catch(error => console.error('Lỗi khi tải dữ liệu JSON:', error));
+fetch('http://localhost:3000/students')
+    .then(response => response.json())
+    .then(data => {
+        const studentList = document.getElementById('student-list');
+        data.forEach(student => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${student.student_id}</td>
+                <td>${student.name}</td>
+                <td>${student.course_year}</td>
+                <td><button onclick="showDetails('${student.student_id}')">Xem</button></td>
+            `;
+            studentList.appendChild(row);
+        });
+    })
+    .catch(error => console.error('Lỗi khi tải dữ liệu JSON:', error));
 
-        // Hiển thị chi tiết sinh viên
-        function showDetails(studentId) {
-            fetch('data/students.json')
-                .then(response => response.json())
-                .then(data => {
-                    const student = data.students.find(s => s.student_id === studentId);
-                    if (student) {
-                        const studentInfo = document.getElementById('student-info');
-                        studentInfo.innerHTML = `
-                            <li><strong>Mã SV:</strong> ${student.student_id}</li>
-                            <li><strong>Họ tên:</strong> ${student.name}</li>
-                            <li><strong>Ngày sinh:</strong> ${student.birthdate}</li>
-                            <li><strong>Khóa:</strong> ${student.course_year}</li>
-                            <li><strong>Thành phố:</strong> ${student.hometown}</li>
-                            <li><strong>Địa chỉ:</strong> ${student.address}</li>
-                        `;
-                        // Cập nhật link chỉnh sửa
-                        document.getElementById('edit-link').href = `edit-ad.html?student_id=${student.student_id}`;
-                    } else {
-                        console.error('Không tìm thấy sinh viên với mã:', studentId);
-                    }
-                })
-                .catch(error => console.error('Lỗi khi tải dữ liệu sinh viên:', error));
-        }
+// Hiển thị chi tiết sinh viên
+function showDetails(studentId) {
+    fetch('http://localhost:3000/students')
+        .then(response => response.json())
+        .then(data => {
+            const student = data.find(s => s.student_id === studentId);
+            if (student) {
+                const studentInfo = document.getElementById('student-info');
+                studentInfo.innerHTML = `
+                    <li><strong>Mã SV:</strong> ${student.student_id}</li>
+                    <li><strong>Họ tên:</strong> ${student.name}</li>
+                    <li><strong>Ngày sinh:</strong> ${student.birthdate}</li>
+                    <li><strong>Khóa:</strong> ${student.course_year}</li>
+                    <li><strong>Thành phố:</strong> ${student.hometown}</li>
+                    <li><strong>Địa chỉ:</strong> ${student.address}</li>
+                `;
+                // Cập nhật link chỉnh sửa
+                document.getElementById('edit-link').href = `edit-ad.html?student_id=${student.student_id}`;
+            } else {
+                console.error('Không tìm thấy sinh viên với mã:', studentId);
+            }
+        })
+        .catch(error => console.error('Lỗi khi tải dữ liệu sinh viên:', error));
+}
+
     </script>
 
     <footer class="footer">
-        <p>&copy; 2024 Nguyễn Tiến Thiệu</p>
+        <p>Copyright @ 2024 Nguyễn Tiến Thiệu</p>
     </footer>
 </body>
 </html>

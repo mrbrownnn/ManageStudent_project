@@ -24,7 +24,7 @@
                 <div class="form-grid">
                     <div>
                         <label for="student_id">Mã sinh viên:</label>
-                        <input type="text" id="student_id" required disabled>
+                        <input type="text" id="student_id" required >
                     </div>
                     <div>
                         <label for="name">Họ và tên:</label>
@@ -57,84 +57,99 @@
     </div>
 
     <script>
-        // Hàm lấy student_id từ URL
-        function getStudentIdFromURL() {
-            const params = new URLSearchParams(window.location.search);
-            return params.get('student_id');
-        }
+let studentId = null;  // Biến toàn cục để lưu student_id
+let studentUniqueId = null;  // Biến toàn cục để lưu id (unique)
 
-        // Hàm tải thông tin sinh viên dựa vào student_id
-        function loadStudentData() {
-            const studentId = getStudentIdFromURL();
-            if (!studentId) {
-                document.getElementById('message').textContent = 'Không tìm thấy mã sinh viên.';
-                return;
+function getStudentIdFromURL() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get('student_id');
+}
+
+// Hàm tải thông tin sinh viên dựa vào student_id
+function loadStudentData() {
+    studentId = getStudentIdFromURL();
+    if (!studentId) {
+        document.getElementById('message').textContent = 'Không tìm thấy mã sinh viên.';
+        return;
+    }
+
+    // Đường dẫn đến API chứa dữ liệu sinh viên
+    fetch('http://localhost:3000/students')
+        .then(response => response.json())
+        .then(data => {
+            var student = data.find(s => s.student_id === studentId); // Tìm sinh viên bằng student_id
+            if (student) {
+                // Lưu id duy nhất của sinh viên vào biến
+                studentUniqueId = student.id; 
+
+                // Hiển thị thông tin sinh viên lên form
+                document.getElementById('student_id').value = student.student_id;
+                document.getElementById('name').value = student.name;
+                document.getElementById('birthdate').value = student.birthdate;
+                document.getElementById('course_year').value = student.course_year;
+                document.getElementById('hometown').value = student.hometown;
+                document.getElementById('address').value = student.address;
+            } else {
+                document.getElementById('message').textContent = 'Không tìm thấy dữ liệu sinh viên.';
             }
-
-            // Đường dẫn đến file JSON chứa dữ liệu sinh viên (thay thế bằng API endpoint nếu có)
-            fetch('data/students.json')
-                .then(response => response.json())
-                .then(data => {
-                    const student = data.students.find(s => s.student_id === studentId);
-                    if (student) {
-                        document.getElementById('student_id').value = student.student_id;
-                        document.getElementById('name').value = student.name;
-                        document.getElementById('birthdate').value = student.birthdate;
-                        document.getElementById('course_year').value = student.course_year;
-                        document.getElementById('hometown').value = student.hometown;
-                        document.getElementById('address').value = student.address;
-                    } else {
-                        document.getElementById('message').textContent = 'Không tìm thấy dữ liệu sinh viên.';
-                    }
-                })
-                .catch(error => {
-                    console.error('Lỗi khi tải dữ liệu sinh viên:', error);
-                    document.getElementById('message').textContent = 'Lỗi khi tải dữ liệu sinh viên.';
-                });
-        }
-
-        // Gọi hàm loadStudentData khi trang tải
-        window.onload = loadStudentData;
-
-        // Xử lý khi form được submit
-        document.getElementById('edit-student-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            
-            // Lấy dữ liệu từ form
-            const studentData = {
-                student_id: document.getElementById('student_id').value,
-                name: document.getElementById('name').value,
-                birthdate: document.getElementById('birthdate').value,
-                course_year: document.getElementById('course_year').value,
-                hometown: document.getElementById('hometown').value,
-                address: document.getElementById('address').value
-            };
-
-            // Gửi yêu cầu lưu dữ liệu (thay thế URL với API endpoint)
-            fetch('api-endpoint-url', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(studentData)
-            })
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('message').textContent = 'Lưu dữ liệu thành công!';
-                setTimeout(() => {
-                    window.location.href = 'admin.html';
-                }, 2000); // Chuyển về trang admin sau 2 giây
-            })
-            .catch(error => {
-                console.error('Lỗi khi lưu dữ liệu:', error);
-                document.getElementById('message').textContent = 'Lỗi khi lưu dữ liệu. Vui lòng thử lại.';
-            });
+        })
+        .catch(error => {
+            console.error('Lỗi khi tải dữ liệu sinh viên:', error);
+            document.getElementById('message').textContent = 'Lỗi khi tải dữ liệu sinh viên.';
         });
+}
 
-        // Quay lại trang admin khi bấm nút "Quay Lại"
-        document.getElementById('back-btn').addEventListener('click', function() {
+// Gọi hàm loadStudentData khi trang tải
+window.onload = loadStudentData;
+
+// Xử lý khi form được submit
+document.getElementById('edit-student-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    // Đảm bảo rằng `id` của sinh viên đã được lưu
+    if (!studentUniqueId) {
+        document.getElementById('message').textContent = 'Không thể xác định sinh viên để cập nhật.';
+        return;
+    }
+    
+    // Lấy dữ liệu từ form
+    const studentData = {
+        student_id: document.getElementById('student_id').value,
+        name: document.getElementById('name').value,
+        birthdate: document.getElementById('birthdate').value,
+        course_year: document.getElementById('course_year').value,
+        hometown: document.getElementById('hometown').value,
+        address: document.getElementById('address').value
+    };
+
+    // Gửi yêu cầu PUT để cập nhật thông tin sinh viên dựa trên `id` duy nhất
+    fetch(`http://localhost:3000/students/${studentUniqueId}`, {  // Sử dụng id để xác định sinh viên
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(studentData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById('message').textContent = 'Cập nhật dữ liệu thành công!';
+        setTimeout(() => {
             window.location.href = 'admin.html';
-        });
+        }, 2000); // Chuyển về trang admin sau 2 giây
+    })
+    .catch(error => {
+        console.error('Lỗi khi lưu dữ liệu:', error);
+        document.getElementById('message').textContent = 'Lỗi khi lưu dữ liệu. Vui lòng thử lại.';
+    });
+});
+
+// Quay lại trang admin khi bấm nút "Quay Lại"
+document.getElementById('back-btn').addEventListener('click', function() {
+    window.location.href = 'admin.html';
+});
+
+
+
     </script>
 
     <footer class="footer">

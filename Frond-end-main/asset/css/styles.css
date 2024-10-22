@@ -1,4 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap");
+:root {
+    --blue-color : #007acc;
+}
 /* Reset mặc định */
 * {
     margin: 0;
@@ -19,7 +22,7 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    background-color: #007acc;
+    background-color: var(--blue-color);
 }
 
 .navbar .logo {
@@ -156,7 +159,7 @@ td {
 }
 
 .grade-table th, .course-table th {
-    background-color: #007acc;
+    background-color: var(--blue-color);
     color: white;
 }
 
@@ -175,8 +178,7 @@ td {
 
 .submit-btn button {
     padding: 10px 20px;
-    background-color: #007acc;
-    color: white;
+    background-color: var(--blue-color);
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -199,7 +201,7 @@ td {
 }
 
 .student-details li strong {
-    color: #007acc;
+    color: var(--blue-color);
 }
 
 /* Biểu đồ điểm */
@@ -225,7 +227,7 @@ td {
 .edit-btn .button {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #007acc;
+    background-color: var(--blue-color);
     color: white;
     border-radius: 5px;
     text-decoration: none;
@@ -280,9 +282,9 @@ td {
 }
 
 .submit-btn button {
+    color:#fff;
     padding: 10px 20px;
-    background-color: #007acc;
-    color: white;
+    background-color: var(--blue-color);
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -319,8 +321,7 @@ td {
 }
 
 .student-table th {
-    background-color: #007acc;
-    color: white;
+    background-color: var(--blue-color);
     font-weight: bold;
 }
 
@@ -330,7 +331,7 @@ td {
 
 .student-table button {
     padding: 6px 12px;
-    background-color: #007acc;
+    background-color: var(--blue-color);
     color: white;
     border: none;
     border-radius: 5px;
@@ -367,7 +368,7 @@ td {
 }
 
 .student-details ul li strong {
-    color: #007acc;
+    color: var(--blue-color);
 }
 
 .edit-btn {
@@ -377,7 +378,7 @@ td {
 
 .edit-btn .button {
     padding: 10px 20px;
-    background-color: #007acc;
+    background-color: var(--blue-color);
     color: white;
     border-radius: 5px;
     text-decoration: none;

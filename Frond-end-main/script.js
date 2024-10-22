@@ -23,6 +23,7 @@ const showHiddenPass = (loginPass, loginEye) => {
    })
 }
 showHiddenPass('login-pass','login-eye');
+//========SIGN IN======
 // Lắng nghe sự kiện submit của form đăng nhập
 document.querySelector('.login__form').addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -33,7 +34,7 @@ document.querySelector('.login__form').addEventListener('submit', async (e) => {
     
     try {
         // Gửi yêu cầu đăng nhập đến API
-        const response = await fetch('http://localhost:3000/api/login', {
+        const response = await fetch('http://localhost:3000/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -50,11 +51,14 @@ document.querySelector('.login__form').addEventListener('submit', async (e) => {
             sessionStorage.setItem('student_id', result.student_id);
             sessionStorage.setItem('role', result.role); // Lưu vai trò
 
-            // Điều hướng dựa trên vai trò
+            // Điều hướng đến trang profile
+            window.location.href = 'profile.html'; 
+
+            // Kiểm tra nếu là admin, chuyển hướng đến trang admin sau khi vào profile
             if (result.role === 'admin') {
-                window.location.href = 'admin.html'; // Trang admin
-            } else if (result.role === 'student') {
-                window.location.href = 'profile.html'; // Trang thông tin sinh viên
+                setTimeout(() => {
+                    window.location.href = 'admin.html'; // Chuyển sang trang admin
+                }, 500); // Đợi 0.5 giây để đảm bảo quá trình tải trang profile
             }
         } else {
             // Xử lý khi đăng nhập thất bại
@@ -66,5 +70,3 @@ document.querySelector('.login__form').addEventListener('submit', async (e) => {
         alert('Có lỗi xảy ra. Vui lòng thử lại.');
     }
 });
-
-

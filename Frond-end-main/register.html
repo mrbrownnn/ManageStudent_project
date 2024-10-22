@@ -6,7 +6,7 @@
     <title>Đăng ký môn học</title>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="asset/css/styles.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Thêm thư viện jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <!-- Thanh điều hướng -->
@@ -37,6 +37,7 @@
                             <th>Phòng học</th>
                             <th>Ngày học</th>
                             <th>Thời gian</th>
+                            <th>Số lượng</th>
                             <th>Chọn</th>
                         </tr>
                     </thead>
@@ -56,69 +57,76 @@
     
     <script>
         $(document).ready(function() {
-    // Lấy `student_id` từ sessionStorage
-    const studentId = sessionStorage.getItem('student_id');
-    
-    // Kiểm tra nếu `student_id` không tồn tại
-    if (!studentId) {
-        alert('Bạn cần đăng nhập để xem thông tin.');
-        window.location.href = 'index.html'; // Điều hướng đến trang đăng nhập nếu chưa đăng nhập
-        return;
-    }
-
-    // Tải danh sách môn học từ backend dựa trên `student_id`
-    $.getJSON(`path/to/your/backend/api/courses?student_id=${studentId}`, function(data) {
-        const tableBody = $('#courseTable tbody');
-        tableBody.empty(); // Xóa các hàng cũ (nếu có)
-        
-        // Tạo hàng mới cho từng môn học
-        data.forEach(course => {
-            const row = `
-                <tr>
-                    <td>${course.code}</td>
-                    <td>${course.name}</td>
-                    <td>${course.group}</td>
-                    <td>${course.credits}</td>
-                    <td>${course.classroom}</td>
-                    <td>${course.day}</td>
-                    <td>${course.time}</td>
-                    <td><input type="checkbox" name="course" value="${course.code}"></td>
-                </tr>
-            `;
-            tableBody.append(row);
-        });
-    }).fail(function() {
-        alert('Không thể tải danh sách môn học.');
-    });
-
-    // Xử lý sự kiện gửi form đăng ký
-    $('#registrationForm').on('submit', function(event) {
-        event.preventDefault();
-        
-        // Lấy danh sách mã môn học đã chọn
-        const selectedCourses = $('input[name="course"]:checked').map(function() {
-            return this.value;
-        }).get();
-        
-        // Gửi yêu cầu đăng ký môn học đến backend
-        $.ajax({
-            url: 'path/to/your/backend/api/register', // Thay thế bằng đường dẫn API chính xác
-            type: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify({
-                studentId: studentId, // Bao gồm `student_id`
-                selectedCourses: selectedCourses
-            }),
-            success: function(response) {
-                alert('Đăng ký thành công!');
-            },
-            error: function(error) {
-                alert('Có lỗi xảy ra, vui lòng thử lại.');
+            // Lấy `student_id` từ sessionStorage
+            const studentId = sessionStorage.getItem('student_id');
+            
+            if (!studentId) {
+                alert('Bạn cần đăng nhập để xem thông tin.');
+                window.location.href = 'index.html';
+                return;
             }
-        });
-    });
-});
 
+            // Tải danh sách môn học từ backend
+            $.getJSON(`http://localhost:3000/courses`, function(data) {
+                const tableBody = $('#courseTable tbody');
+                tableBody.empty();
+                
+                // Tạo hàng mới cho từng môn học
+                data.forEach(course => {
+                    const isFull = course.slot === 0;
+                    const row = `
+                        <tr>
+                            <td>${course.code}</td>
+                            <td>${course.name}</td>
+                            <td>${course.group}</td>
+                            <td>${course.credits}</td>
+                            <td>${course.classroom}</td>
+                            <td>${course.day}</td>
+                            <td>${course.time}</td>
+                            <td>${course.slot}</td>
+                            <td>
+                                <input type="checkbox" name="course" value="${course.code}" ${isFull ? 'disabled' : ''} 
+                                       ${isFull ? 'class="full-slot"' : ''} title="${isFull ? 'Lớp đã hết số lượng' : ''}">
+                            </td>
+                        </tr>
+                    `;
+                    tableBody.append(row);
+                });
+                
+                // Thêm thông báo khi nhấp vào checkbox không thể chọn
+                $('#courseTable').on('click', '.full-slot', function(event) {
+                    event.preventDefault();
+                    alert('Lớp đã hết số lượng!');
+                });
+            }).fail(function() {
+                alert('Không thể tải danh sách môn học.');
+            });
+
+            // Xử lý sự kiện gửi form đăng ký
+            $('#registrationForm').on('submit', function(event) {
+                event.preventDefault();
+                
+                const selectedCourses = $('input[name="course"]:checked').map(function() {
+                    return this.value;
+                }).get();
+                
+                $.ajax({
+                    url: 'path/to/your/backend/api/register',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        studentId: studentId,
+                        selectedCourses: selectedCourses
+                    }),
+                    success: function(response) {
+                        alert('Đăng ký thành công!');
+                    },
+                    error: function(error) {
+                        alert('Có lỗi xảy ra, vui lòng thử lại.');
+                    }
+                });
+            });
+        });
     </script>
 </body>
 </html>

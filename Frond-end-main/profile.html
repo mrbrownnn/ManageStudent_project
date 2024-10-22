@@ -52,7 +52,7 @@ window.onload = async () => {
     
     if (studentId) {
         try {
-            const response = await fetch(`data/grades.json${studentId}`, {
+            const response = await fetch(`http://localhost:3000/info`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${sessionStorage.getItem('token')}` // Nếu sử dụng JWT
