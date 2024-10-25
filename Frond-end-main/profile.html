@@ -52,10 +52,17 @@ window.onload = async () => {
     
     if (studentId) {
         try {
-            const response = await fetch(`http://localhost:3000/info`, {
+            const response = await fetch(`http://localhost:8080/info`,
+            //fetch api
+             {
                 method: 'GET',
                 headers: {
-                    'Authorization': `Bearer ${sessionStorage.getItem('token')}` // Nếu sử dụng JWT
+                    'Authorization': `Bearer ${sessionStorage.getItem('token')}` 
+                    // lay token tu session storage
+                    //json
+                    // Nếu sử dụng JWT
+                    // 2
+                    // http status, 
                 }
             });
             
