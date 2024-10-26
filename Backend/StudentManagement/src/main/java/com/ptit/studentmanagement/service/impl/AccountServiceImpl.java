@@ -1,4 +1,4 @@
-package com.ptit.studentmanagement.service.impl;
+/*package com.ptit.studentmanagement.service.impl;
 
 import com.ptit.studentmanagement.domain.entities.Accounts;
 import com.ptit.studentmanagement.domain.playload.request.AccountRequest;
@@ -27,3 +27,4 @@ public class AccountServiceImpl implements AccountService {
         return accountRepository.findById(id).orElseThrow(() -> new BadRequestException("Account not found"));
     }
 }
+*/
