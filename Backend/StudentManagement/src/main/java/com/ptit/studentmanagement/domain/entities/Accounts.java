@@ -15,12 +15,15 @@ import org.hibernate.annotations.GeneratedColumn;
 @Data
 public class Accounts {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long accountId;
+    @Column(length = 20)
+    private String accountId;
     @Column(length = 20 , unique = true)
     private String username;
     @Column(length = 255)
     private String password;
     @Enumerated(EnumType.STRING)
     private RoleName role;
+    @ManyToOne
+    @JoinColumn(name = "student_id")
+    private Students student;
 }

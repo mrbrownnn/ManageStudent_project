@@ -13,8 +13,11 @@ import lombok.*;
 public class PrequisiteCourse {
     @Id
     @Column(length = 20)
+    @ManyToMany(mappedBy = "courseId")
     private String courseId;
-    @Column(length = 20)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long prequisiteCourseId;
+    @Column(length = 20)
+    private boolean Status;
 
 }

@@ -1,6 +1,5 @@
-package com.ptit.studentmanagement.domain.playload.request;
+package com.ptit.studentmanagement.domain.payload.request;
 
-import com.ptit.studentmanagement.domain.enums.RoleName;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;

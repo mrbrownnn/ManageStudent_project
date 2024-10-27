@@ -1,6 +1,6 @@
 package com.ptit.studentmanagement.controller;
 
-import com.ptit.studentmanagement.domain.playload.request.AccountRequest;
+import com.ptit.studentmanagement.domain.payload.request.AccountRequest;
 import com.ptit.studentmanagement.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -1,7 +1,7 @@
 package com.ptit.studentmanagement.service;
 
 import com.ptit.studentmanagement.domain.entities.Accounts;
-import com.ptit.studentmanagement.domain.playload.request.AccountRequest;
+import com.ptit.studentmanagement.domain.payload.request.AccountRequest;
 
 public interface AccountService {
     void addStudentAccount(AccountRequest accountRequest);

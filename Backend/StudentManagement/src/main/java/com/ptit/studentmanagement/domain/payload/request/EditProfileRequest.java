@@ -1,13 +1,10 @@
-package com.ptit.studentmanagement.domain.playload.request;
+package com.ptit.studentmanagement.domain.payload.request;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
 
 @Getter
 @Setter

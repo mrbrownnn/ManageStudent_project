@@ -17,7 +17,4 @@ public class PersonalSchedual {
     @Id
     private String studentId;
     private String courseId;
-    private String classId;
-    private String semesterId;
-    // to chuc thanh sieu khoa
 }
